@@ -47,3 +47,37 @@ POST /order/_search
         }
     }
 }
+
+GET /innereye/_search
+{
+    "query":{
+        "match_all":{}
+    }
+}
+
+GET /innereye/_mapping
+
+
+GET /innereye/_search
+{
+    "query": {
+        "nested" : {
+            "path" : "memberInfo",
+          
+            "query" : {
+                "bool" : {
+                    "must" : [
+                    { "match" : {"memberInfo.fullname.keyword" : "刘坡"} }
+                    ]
+                }
+            }
+        }
+    }
+}
+
+GET /innereye/screening/_search
+{
+    "query":{
+       "match" : {"memberInfo.fullname" : "刘坡" }
+    }
+}
